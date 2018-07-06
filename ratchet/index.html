@@ -14,16 +14,25 @@
         socket.onopen = function(e) {
             console.log("Connected!");
         };
+        socket.onopen = () => {
+            setInterval(function() {
+                socket.send('{"action":"update"}');
+            },500);
+        }
 
         socket.onmessage = function(e) {
-            $("p").text(e.data);
+            console.log(e.data);
+            let arr = JSON.parse(e.data);
+            $("p.bid > b").text(arr['Bid']);
+            $("p.ask > b").text(arr['Ask']);
+            $("p.last > b").text(arr['Last']);
         };
 
-        setInterval(function() {
-            socket.send('{"action":"update"}');
-        },200);
+        
         
     </script>
-    <p></p>
+    <p class="bid">Bid: <b></b></p>
+    <p class="ask">Ask: <b></b></p>
+    <p class="last">last: <b></b></p>
 </body>
 </html>
