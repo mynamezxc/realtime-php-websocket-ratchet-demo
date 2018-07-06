@@ -29,7 +29,10 @@ class Price implements MessageComponentInterface {
         if($data['action'] == "update") {
             if($this->defaultOnceClientID != 0 && $this->defaultOnceClientID == $socket->resourceId) {
                 // Get data from API and update once
-                $this->price = rand(1, 20);
+                $jsonData = @file_get_contents("https://api.coindesk.com/v1/bpi/currentprice/VND.json");
+                $arrData  = json_decode($jsonData, true);
+
+                $this->price = "1 BTC = ". number_format($arrData['bpi']['VND']['rate_float']) . " vnđ / " . $arrData['bpi']['USD']['rate_float'] . " usd";
 
                 foreach ($this->clients as $client) {
 
