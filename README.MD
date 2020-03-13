@@ -3,7 +3,7 @@
 $ composer.phar require cboden/ratchet
 ```
 **Make sure port 8080 is open**
-## Copy composer.json, server.php, index.html and src folder (at the same level with Vendor)
+## Copy server.php, index.html and src folder (at the same level with Vendor)
 ```sh
 $ cd your_app_path
 $ composer update
